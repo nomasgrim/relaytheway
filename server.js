@@ -11,10 +11,17 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-var db;
+var db, mongoUri;
 
 // Connect to the database before starting the application server. 
-mongodb.MongoClient.connect(process.env.MONGOLAB_URI, function (err, database) {
+
+if(process.env.MONGOLAB_URI)
+  mongoUri = process.env.MONGOLAB_URI;
+else
+  mongoUri = 'mongodb://localhost:8080';
+
+
+mongodb.MongoClient.connect(mongoUri, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
