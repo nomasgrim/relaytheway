@@ -1,0 +1,22 @@
+{
+  "name": "relay-the-way",
+  "version": "0.0.1",
+  "description": "Self hosted project with Heroku for collecting donations and data.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "grunt uglify",
+    "start": "node server.js"
+  },
+  "author": "Cliff Barendsen <cliff.barendsen@gmail.com>",
+  "repository": "https://github.com/nomasgrim/relaytheway",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.12.3",
+    "grunt": "0.4.5",
+    "grunt-cli": "0.1.13",
+    "grunt-contrib-uglify": "0.9.1"
+  },
+  "engines": {
+    "node": "0.12.2"
+  }
+}
