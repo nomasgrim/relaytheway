@@ -11,10 +11,8 @@
   "repository": "https://github.com/nomasgrim/relaytheway",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.13.3",
     "express": "4.12.3",
     "mongodb": "^2.1.6"
-  },
-  "engines": {
-    "node": "0.12.2"
   }
 }
