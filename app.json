@@ -1,0 +1,8 @@
+{
+  "name": "Relay the Way Contact List",
+  "description": "Relay the Way allows users to donate and create a messag for the time capsule",
+  "repository": "https://github.com/nomasgrim/relaytheway",
+  "logo": "https://mlab.com/company/brand/resources/mLab-logo-onlight.png",
+  "keywords": ["node", "express", "angular", "MEAN", "mongodb", "REST", "API"],
+  "addons": ["mongolab"]
+}
