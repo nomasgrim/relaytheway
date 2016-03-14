@@ -1,5 +1,12 @@
-# Node-Grunt Example
+# Relay the Way
+* Application for donating and saving data from users donating for Relay the way
 
-Use Grunt to build Node.js apps on Heroku.
+### Software utilized
+* Heroku
+* Mean Stack
+* Git
+* NodeJS
+* Express
+* MongoDB
 
-This is the sample companion app for the [Node-Grunt DevCenter Article.](https://devcenter.heroku.com/articles/node-with-grunt)
+### [How to Setup Heroku Mean Stack](https://devcenter.heroku.com/articles/mean-apps-restful-api)
