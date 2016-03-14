@@ -1,11 +1,11 @@
-angular.module("donateesApp", ['ngRoute'])
+angular.module("contactsApp", ['ngRoute'])
     .config(function($routeProvider) {
         $routeProvider
             .when("/", {
                 templateUrl: "list.html",
                 controller: "ListController",
                 resolve: {
-                    donatees: function(Contacts) {
+                    contacts: function(Contacts) {
                         return Contacts.getContacts();
                     }
                 }
@@ -14,18 +14,18 @@ angular.module("donateesApp", ['ngRoute'])
                 templateUrl: "about.html",
                 // controller: "ListController",
                 resolve: {
-                    // donatees: function(Contacts) {
+                    // contacts: function(Contacts) {
                     //     return Contacts.getContacts();
                     // }
                 }
             })
-            .when("/new/donatee", {
+            .when("/new/contact", {
                 controller: "NewContactController",
-                templateUrl: "donatee-form.html"
+                templateUrl: "contact-form.html"
             })
-            .when("/donatee/:donateeId", {
+            .when("/contact/:contactId", {
                 controller: "EditContactController",
-                templateUrl: "donatee.html"
+                templateUrl: "contact.html"
             })
             .otherwise({
                 redirectTo: "/"
@@ -33,93 +33,93 @@ angular.module("donateesApp", ['ngRoute'])
     })
     .service("Contacts", function($http) {
         this.getContacts = function() {
-            return $http.get("/donatees").
+            return $http.get("/contacts").
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error finding donatees.");
+                    alert("Error finding contacts.");
                 });
         }
-        this.createContact = function(donatee) {
-            return $http.post("/donatees", donatee).
+        this.createContact = function(contact) {
+            return $http.post("/contacts", contact).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error creating donatee.");
+                    alert("Error creating contact.");
                 });
         }
-        this.getContact = function(donateeId) {
-            var url = "/donatees/" + donateeId;
+        this.getContact = function(contactId) {
+            var url = "/contacts/" + contactId;
             return $http.get(url).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error finding this donatee.");
+                    alert("Error finding this contact.");
                 });
         }
-        this.editContact = function(donatee) {
-            var url = "/donatees/" + donatee._id;
-            console.log(donatee._id);
-            return $http.put(url, donatee).
+        this.editContact = function(contact) {
+            var url = "/contacts/" + contact._id;
+            console.log(contact._id);
+            return $http.put(url, contact).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error editing this donatee.");
+                    alert("Error editing this contact.");
                     console.log(response);
                 });
         }
-        this.deleteContact = function(donateeId) {
-            var url = "/donatees/" + donateeId;
+        this.deleteContact = function(contactId) {
+            var url = "/contacts/" + contactId;
             return $http.delete(url).
                 then(function(response) {
                     return response;
                 }, function(response) {
-                    alert("Error deleting this donatee.");
+                    alert("Error deleting this contact.");
                     console.log(response);
                 });
         }
     })
-    .controller("ListController", function(donatees, $scope) {
-        $scope.donatees = donatees.data;
+    .controller("ListController", function(contacts, $scope) {
+        $scope.contacts = contacts.data;
     })
     .controller("NewContactController", function($scope, $location, Contacts) {
         $scope.back = function() {
             $location.path("#/");
         }
 
-        $scope.saveContact = function(donatee) {
-            Contacts.createContact(donatee).then(function(doc) {
-                var donateeUrl = "/donatee/" + doc.data._id;
-                $location.path(donateeUrl);
+        $scope.saveContact = function(contact) {
+            Contacts.createContact(contact).then(function(doc) {
+                var contactUrl = "/contact/" + doc.data._id;
+                $location.path(contactUrl);
             }, function(response) {
                 alert(response);
             });
         }
     })
     .controller("EditContactController", function($scope, $routeParams, Contacts) {
-        Contacts.getContact($routeParams.donateeId).then(function(doc) {
-            $scope.donatee = doc.data;
+        Contacts.getContact($routeParams.contactId).then(function(doc) {
+            $scope.contact = doc.data;
         }, function(response) {
             alert(response);
         });
 
         $scope.toggleEdit = function() {
             $scope.editMode = true;
-            $scope.donateeFormUrl = "donatee-form.html";
+            $scope.contactFormUrl = "contact-form.html";
         }
 
         $scope.back = function() {
             $scope.editMode = false;
-            $scope.donateeFormUrl = "";
+            $scope.contactFormUrl = "";
         }
 
-        $scope.saveContact = function(donatee) {
-            Contacts.editContact(donatee);
+        $scope.saveContact = function(contact) {
+            Contacts.editContact(contact);
             $scope.editMode = false;
-            $scope.donateeFormUrl = "";
+            $scope.contactFormUrl = "";
         }
 
-        $scope.deleteContact = function(donateeId) {
-            Contacts.deleteContact(donateeId);
+        $scope.deleteContact = function(contactId) {
+            Contacts.deleteContact(contactId);
         }
     });
