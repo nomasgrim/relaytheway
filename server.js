@@ -18,11 +18,12 @@ var db, mongoUri;
 if(process.env.MONGOLAB_URI)
   mongoUri = process.env.MONGOLAB_URI;
 else
-  mongoUri = 'mongodb://localhost:8080';
+  mongoUri = 'mongodb://localhost';
 
 
 mongodb.MongoClient.connect(mongoUri, function (err, database) {
   if (err) {
+    console.log('mongo uri', mongoUri);
     console.log(err);
     process.exit(1);
   }
