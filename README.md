@@ -8,5 +8,8 @@
 * NodeJS
 * Express
 * MongoDB
+* Angular
+* Bootstrap
+* PayPal Standard Button
 
 ### [How to Setup Heroku Mean Stack](https://devcenter.heroku.com/articles/mean-apps-restful-api)

@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
-var CONTACTS_COLLECTION = "contacts";
+var CONTACTS_COLLECTION = "donatees";
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
@@ -47,22 +47,22 @@ function handleError(reason, message, code) {
   res.status(code || 500).json({"error": message});
 }
 
-/*  "/contacts"
- *    GET: finds all contacts
+/*  "/donatees"
+ *    GET: finds all donatees
  *    POST: creates a new contact
  */
 
-app.get("/contacts", function(req, res) {
+app.get("/donatees", function(req, res) {
   db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
-      handleError(err.message, "Failed to get contacts.");
+      handleError(err.message, "Failed to get donatees.");
     } else {
       res.status(200).json(docs);  
     }
   });
 });
 
-app.post("/contacts", function(req, res) {
+app.post("/donatees", function(req, res) {
   var newContact = req.body;
   newContact.createDate = new Date();
 
@@ -79,13 +79,13 @@ app.post("/contacts", function(req, res) {
   });
 });
 
-/*  "/contacts/:id"
+/*  "/donatees/:id"
  *    GET: find contact by id
  *    PUT: update contact by id
  *    DELETE: deletes contact by id
  */
 
-app.get("/contacts/:id", function(req, res) {
+app.get("/donatees/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
     if (err) {
       handleError(err.message, "Failed to get contact");
@@ -95,7 +95,7 @@ app.get("/contacts/:id", function(req, res) {
   });
 });
 
-app.put("/contacts/:id", function(req, res) {
+app.put("/donatees/:id", function(req, res) {
   var updateDoc = req.body;
 
   db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
@@ -107,7 +107,7 @@ app.put("/contacts/:id", function(req, res) {
   });
 });
 
-app.delete("/contacts/:id", function(req, res) {
+app.delete("/donatees/:id", function(req, res) {
   db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
     if (err) {
       handleError(err.message, "Failed to delete contact");
