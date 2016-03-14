@@ -27,6 +27,15 @@ angular.module("contactsApp", ['ngRoute'])
                 controller: "EditContactController",
                 templateUrl: "contact.html"
             })
+            .when("/success", {
+                templateUrl: "success.html",
+                // controller: "ListController",
+                resolve: {
+                    // contacts: function(Contacts) {
+                    //     return Contacts.getContacts();
+                    // }
+                }
+            })
             .otherwise({
                 redirectTo: "/"
             })
